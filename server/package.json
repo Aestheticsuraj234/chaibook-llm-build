@@ -14,6 +14,7 @@
   "type": "module",
   "dependencies": {
     "@mendable/firecrawl-js": "^4.32.0",
+    "@pinecone-database/pinecone": "^8.2.0",
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
     "better-auth": "^1.6.25",
@@ -22,7 +23,9 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "firecrawl": "^4.32.0",
+    "inngest": "^4.15.0",
     "multer": "^2.2.0",
+    "openai": "^7.4.0",
     "pg": "^8.22.0",
     "prisma": "^7.9.1",
     "unpdf": "^1.8.0",

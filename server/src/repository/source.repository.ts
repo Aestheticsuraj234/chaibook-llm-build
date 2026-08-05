@@ -89,3 +89,26 @@ export async function deleteSourceRecord(sourceId: string) {
         where: { id: sourceId },
     });
 }
+
+
+export function findSourceById(sourceId: string) {
+    return prisma.source.findUnique({
+        where: { id: sourceId },
+        select: sourceSelect,
+    });
+}
+
+export function updateSourceRecord(
+    sourceId: string,
+    data: {
+        content?: string | null;
+        status?: SourceRecord["status"];
+        metadata?: Prisma.InputJsonValue;
+    },
+) {
+    return prisma.source.update({
+        where: { id: sourceId },
+        data,
+        select: sourceSelect,
+    });
+}
