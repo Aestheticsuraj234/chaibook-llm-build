@@ -1,4 +1,4 @@
-import { Prisma } from "../generated/prisma/client.js";
+import type { Prisma } from "../generated/prisma/client.js";
 import prisma from "../lib/db.js";
 import { ListSourcesQuery } from "../validators/source.validator.js";
 
@@ -15,6 +15,9 @@ export const sourceSelect = {
     updatedAt: true,
 } as const;
 
+export type SourceRecord = Prisma.SourceGetPayload<{
+    select: typeof sourceSelect;
+}>;
 
 export function findSourcesByWorkspaceId(
     workspaceId: string,
@@ -41,5 +44,21 @@ export function findSourcesByWorkspaceId(
         where,
         select: sourceSelect,
         orderBy: { createdAt: "desc" },
+    });
+}
+
+export function findSourceByIdAndWorkspaceId(
+    sourceId: string,
+    workspaceId: string,
+) {
+    return prisma.source.findFirst({
+        where: { id: sourceId, workspaceId },
+        select: sourceSelect,
+    });
+}
+
+export async function deleteSourceRecord(sourceId: string) {
+    await prisma.source.delete({
+        where: { id: sourceId },
     });
 }
